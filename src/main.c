@@ -37,5 +37,7 @@ void main()
 	// }
 	
 	// 数码管显示123
-	display123();
+	// display123();
+
+	LCD1602_Sample();
 }

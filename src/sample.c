@@ -1,6 +1,7 @@
 #include <REGX52.H>
 #include "sample.h"
 #include "func.h"
+#include "LCD1602.h"
 
 void LedLightEvery500ms()
 {
@@ -134,5 +135,20 @@ void display123()
 //		Delay(20);
 		Nixie(3,3);		//在数码管的第3位置显示3
 //		Delay(20);
+	}
+}
+
+
+
+
+void LCD1602_Sample()
+{
+    int Result=0;
+	LCD_Init();
+	while(1)
+	{
+		Result++;					//Result自增
+		Delay(1000);				//延时1秒
+		LCD_ShowNum(1,1,Result,3);	//在LCD的1行1列显示Result，长度为3位
 	}
 }

@@ -23,4 +23,6 @@ void BUttonPrevNextLed();
 //数码管 显示123
 void display123();
 
+void LCD1602_Sample();
+
 #endif
