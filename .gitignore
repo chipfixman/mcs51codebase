@@ -1,1 +1,10 @@
+./src/Listings/Project.m51
+./src/Listings/main.lst
+./src/Objects/Project
+./src/Objects/Project.build_log.htm
+./src/Objects/Project.hex
+./src/Objects/Project.lnp
+./src/Objects/main.obj
+
 ./src/Objects/*
+./src/Listings/*

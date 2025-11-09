@@ -1,8 +1,9 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        11/07/2025  09:15:22  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/09/2025  19:42:25  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\Project PRINT (.\Listings\Project.m51) RAMSIZE (256)
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\func.obj, .\Objects\sample.obj TO .\Objects\Project PRINT (.\L
+>> istings\Project.m51) RAMSIZE (256)
 
 
 MEMORY MODEL: SMALL
@@ -10,7 +11,10 @@ MEMORY MODEL: SMALL
 
 INPUT MODULES INCLUDED:
   .\Objects\main.obj (MAIN)
+  .\Objects\func.obj (FUNC)
+  .\Objects\sample.obj (SAMPLE)
   C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?COPY)
 
 
 LINK MAP OF MODULE:  .\Objects\Project (MAIN)
@@ -21,23 +25,55 @@ LINK MAP OF MODULE:  .\Objects\Project (MAIN)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            IDATA   0008H     0001H     UNIT         ?STACK
+            DATA    0008H     000DH     UNIT         _DATA_GROUP_
+            DATA    0015H     0001H     UNIT         ?DT?BUTTONLEDBINARYCALC?SAMPLE
+            DATA    0016H     0001H     UNIT         ?DT?BUTTONPREVNEXTLED?SAMPLE
+            IDATA   0017H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     000CH     UNIT         ?C_C51STARTUP
-            CODE    000FH     0005H     UNIT         ?PR?MAIN?MAIN
+            CODE    0003H     00F6H     UNIT         ?C?LIB_CODE
+            CODE    00F9H     0088H     UNIT         ?PR?_NIXIE?FUNC
+            CODE    0181H     0064H     UNIT         ?PR?BUTTONPREVNEXTLED?SAMPLE
+            CODE    01E5H     0032H     UNIT         ?PR?LEDLIGHTONEBYONE?SAMPLE
+            CODE    0217H     0020H     UNIT         ?PR?BUTTONLEDBINARYCALC?SAMPLE
+            CODE    0237H     001DH     UNIT         ?PR?DISPLAY123?SAMPLE
+            CODE    0254H     0018H     UNIT         ?PR?BUTTONCONTROLLED?SAMPLE
+            CODE    026CH     0014H     UNIT         ?PR?_DELAY1MS?FUNC
+            CODE    0280H     000EH     UNIT         ?PR?DELAY500MS?FUNC
+            CODE    028EH     000EH     UNIT         ?PR?LEDLIGHTEVERY500MS?SAMPLE
+            CODE    029CH     000EH     UNIT         ?PR?PRESSDOWNCONTROLLED?SAMPLE
+            CODE    02AAH     000CH     UNIT         ?C_C51STARTUP
+            CODE    02B6H     000AH     UNIT         ?CO?FUNC
+            CODE    02C0H     0003H     UNIT         ?PR?MAIN?MAIN
+            CODE    02C3H     0003H     UNIT         ?PR?_DELAY?FUNC
 
 
 
 OVERLAY MAP OF MODULE:   .\Objects\Project (MAIN)
 
 
-SEGMENT
-  +--> CALLED SEGMENT
----------------------
-?C_C51STARTUP
+SEGMENT                                  DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH
+------------------------------------------------------
+?C_C51STARTUP                          -----    -----
   +--> ?PR?MAIN?MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2025  19:42:25  PAGE 2
+
+
+?PR?MAIN?MAIN                          -----    -----
+  +--> ?PR?DISPLAY123?SAMPLE
+
+?PR?DISPLAY123?SAMPLE                  -----    -----
+  +--> ?PR?_NIXIE?FUNC
+
+?PR?_NIXIE?FUNC                        0008H    000DH
+  +--> ?CO?FUNC
+  +--> ?PR?_DELAY?FUNC
+
+?PR?_DELAY?FUNC                        -----    -----
+  +--> ?PR?_DELAY1MS?FUNC
 
 
 
@@ -48,20 +84,266 @@ SYMBOL TABLE OF MODULE:  .\Objects\Project (MAIN)
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
-  D:00A0H         PUBLIC        P2
-  C:000FH         PUBLIC        main
+  C:02C0H         PUBLIC        main
   -------         PROC          MAIN
-  C:000FH         LINE#         3
-  C:000FH         LINE#         4
-  C:000FH         LINE#         5
-  C:0012H         LINE#         6
-  C:0012H         LINE#         7
-  C:0012H         LINE#         9
+  C:02C0H         LINE#         13
+  C:02C0H         LINE#         14
+  C:02C0H         LINE#         40
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/07/2025  09:15:22  PAGE 2
+
+  -------         MODULE        FUNC
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:00F9H         PUBLIC        _Nixie
+  D:0080H         PUBLIC        P0
+  C:026CH         PUBLIC        _Delay1ms
+  B:00A0H.2       PUBLIC        P2_2
+  B:00A0H.3       PUBLIC        P2_3
+  B:00A0H.4       PUBLIC        P2_4
+  C:02B6H         SYMBOL        _?ix1000
+  C:0280H         PUBLIC        Delay500ms
+  C:02C3H         PUBLIC        _Delay
+  -------         PROC          DELAY500MS
+  -------         DO            
+  D:0007H         SYMBOL        i
+  D:0006H         SYMBOL        j
+  D:0005H         SYMBOL        k
+  -------         ENDDO         
+  C:0280H         LINE#         6
+  C:0280H         LINE#         7
+  C:0280H         LINE#         10
+  C:0281H         LINE#         11
+  C:0283H         LINE#         12
+  C:0285H         LINE#         13
+  C:0287H         LINE#         15
+  C:0287H         LINE#         17
+  C:0287H         LINE#         18
+  C:0289H         LINE#         19
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2025  19:42:25  PAGE 3
 
 
+  C:028BH         LINE#         20
+  C:028DH         LINE#         21
+  -------         ENDPROC       DELAY500MS
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        xms
+  C:02C3H         LINE#         23
+  C:02C3H         LINE#         24
+  C:02C3H         LINE#         25
+  -------         ENDPROC       _DELAY
+  -------         PROC          _DELAY1MS
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:026CH         LINE#         30
+  C:026CH         LINE#         31
+  C:026CH         LINE#         33
+  C:0270H         LINE#         34
+  C:0270H         LINE#         35
+  C:0272H         LINE#         36
+  C:0274H         LINE#         38
+  C:0274H         LINE#         39
+  C:0276H         LINE#         40
+  C:0278H         LINE#         41
+  C:027DH         LINE#         42
+  C:027FH         LINE#         44
+  -------         ENDPROC       _DELAY1MS
+  -------         PROC          _NIXIE
+  D:0008H         SYMBOL        Location
+  D:0009H         SYMBOL        Number
+  -------         DO            
+  D:000BH         SYMBOL        NixieTable
+  -------         ENDDO         
+  C:00F9H         LINE#         47
+  C:00FFH         LINE#         48
+  C:00FFH         LINE#         56
+  C:0112H         LINE#         60
+  C:0140H         LINE#         61
+  C:0140H         LINE#         62
+  C:0144H         LINE#         63
+  C:0148H         LINE#         64
+  C:014CH         LINE#         65
+  C:0150H         LINE#         66
+  C:0158H         LINE#         67
+  C:0160H         LINE#         68
+  C:0168H         LINE#         69
+  C:016EH         LINE#         70
+  C:016EH         LINE#         71
+  C:0176H         LINE#         72
+  C:017DH         LINE#         73
+  C:0180H         LINE#         74
+  -------         ENDPROC       _NIXIE
+  -------         ENDMOD        FUNC
 
-Program Size: data=9.0 xdata=0 code=20
-LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
+  -------         MODULE        SAMPLE
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2025  19:42:25  PAGE 4
+
+
+  D:00A0H         PUBLIC        P2
+  C:0237H         PUBLIC        display123
+  B:00A0H.0       PUBLIC        P2_0
+  B:00B0H.0       PUBLIC        P3_0
+  B:00B0H.1       PUBLIC        P3_1
+  C:028EH         PUBLIC        LedLightEvery500ms
+  C:029CH         PUBLIC        PressDownControlLed
+  C:01E5H         PUBLIC        LedLightOnebyOne
+  C:0181H         PUBLIC        BUttonPrevNextLed
+  C:0217H         PUBLIC        ButtonLedBinaryCalc
+  C:0254H         PUBLIC        ButtonControlLed
+  -------         PROC          LEDLIGHTEVERY500MS
+  C:028EH         LINE#         5
+  C:028EH         LINE#         6
+  C:028EH         LINE#         7
+  C:028EH         LINE#         8
+  C:028EH         LINE#         9
+  C:0291H         LINE#         11
+  C:0294H         LINE#         12
+  C:0297H         LINE#         13
+  C:029AH         LINE#         14
+  -------         ENDPROC       LEDLIGHTEVERY500MS
+  -------         PROC          LEDLIGHTONEBYONE
+  C:01E5H         LINE#         20
+  C:01E5H         LINE#         21
+  C:01E5H         LINE#         22
+  C:01E5H         LINE#         23
+  C:01E5H         LINE#         24
+  C:01E8H         LINE#         25
+  C:01EBH         LINE#         26
+  C:01EEH         LINE#         27
+  C:01F1H         LINE#         28
+  C:01F4H         LINE#         29
+  C:01F7H         LINE#         30
+  C:01FAH         LINE#         31
+  C:01FDH         LINE#         32
+  C:0200H         LINE#         33
+  C:0203H         LINE#         34
+  C:0206H         LINE#         35
+  C:0209H         LINE#         36
+  C:020CH         LINE#         37
+  C:020FH         LINE#         38
+  C:0212H         LINE#         39
+  C:0215H         LINE#         40
+  -------         ENDPROC       LEDLIGHTONEBYONE
+  -------         PROC          PRESSDOWNCONTROLLED
+  C:029CH         LINE#         45
+  C:029CH         LINE#         46
+  C:029CH         LINE#         47
+  C:029CH         LINE#         48
+  C:029CH         LINE#         49
+  C:02A2H         LINE#         50
+  C:02A2H         LINE#         51
+  C:02A4H         LINE#         52
+  C:02A6H         LINE#         54
+  C:02A6H         LINE#         55
+  C:02A8H         LINE#         56
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2025  19:42:25  PAGE 5
+
+
+  C:02A8H         LINE#         57
+  -------         ENDPROC       PRESSDOWNCONTROLLED
+  -------         PROC          BUTTONCONTROLLED
+  C:0254H         LINE#         61
+  C:0254H         LINE#         62
+  C:0254H         LINE#         63
+  C:0254H         LINE#         64
+  C:0254H         LINE#         65
+  C:0257H         LINE#         66
+  C:0257H         LINE#         67
+  C:025EH         LINE#         68
+  C:0261H         LINE#         69
+  C:0268H         LINE#         71
+  C:026AH         LINE#         72
+  C:026AH         LINE#         73
+  -------         ENDPROC       BUTTONCONTROLLED
+  -------         PROC          BUTTONLEDBINARYCALC
+  -------         DO            
+  D:0015H         SYMBOL        LEDNum
+  -------         ENDDO         
+  C:0217H         LINE#         77
+  C:0217H         LINE#         78
+  C:0217H         LINE#         79
+  C:021AH         LINE#         80
+  C:021AH         LINE#         81
+  C:021AH         LINE#         82
+  C:021DH         LINE#         83
+  C:021DH         LINE#         84
+  C:0224H         LINE#         85
+  C:0227H         LINE#         86
+  C:022EH         LINE#         88
+  C:0230H         LINE#         89
+  C:0235H         LINE#         90
+  C:0235H         LINE#         91
+  -------         ENDPROC       BUTTONLEDBINARYCALC
+  -------         PROC          BUTTONPREVNEXTLED
+  -------         DO            
+  D:0016H         SYMBOL        LEDNum
+  -------         ENDDO         
+  C:0181H         LINE#         95
+  C:0181H         LINE#         96
+  C:0181H         LINE#         98
+  C:0184H         LINE#         99
+  C:0184H         LINE#         100
+  C:0184H         LINE#         101
+  C:0187H         LINE#         102
+  C:0187H         LINE#         103
+  C:018EH         LINE#         104
+  C:0191H         LINE#         105
+  C:0198H         LINE#         107
+  C:019AH         LINE#         108
+  C:01A1H         LINE#         109
+  C:01A4H         LINE#         110
+  C:01B4H         LINE#         111
+  C:01B4H         LINE#         112
+  C:01B7H         LINE#         113
+  C:01B7H         LINE#         114
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/09/2025  19:42:25  PAGE 6
+
+
+  C:01BEH         LINE#         115
+  C:01C1H         LINE#         116
+  C:01C8H         LINE#         118
+  C:01CCH         LINE#         119
+  C:01D1H         LINE#         121
+  C:01D3H         LINE#         122
+  C:01E3H         LINE#         123
+  C:01E3H         LINE#         124
+  -------         ENDPROC       BUTTONPREVNEXTLED
+  -------         PROC          DISPLAY123
+  C:0237H         LINE#         127
+  C:0237H         LINE#         128
+  C:0237H         LINE#         129
+  C:0237H         LINE#         130
+  C:0237H         LINE#         131
+  C:0240H         LINE#         133
+  C:0249H         LINE#         135
+  C:0252H         LINE#         137
+  -------         ENDPROC       DISPLAY123
+  -------         ENDMOD        SAMPLE
+
+  -------         MODULE        ?C?COPY
+  C:00D3H         PUBLIC        ?C?COPY
+  -------         ENDMOD        ?C?COPY
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LEDLIGHTEVERY500MS?SAMPLE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LEDLIGHTONEBYONE?SAMPLE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?PRESSDOWNCONTROLLED?SAMPLE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?BUTTONCONTROLLED?SAMPLE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?BUTTONLEDBINARYCALC?SAMPLE
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?BUTTONPREVNEXTLED?SAMPLE
+
+Program Size: data=24.0 xdata=0 code=710
+LINK/LOCATE RUN COMPLETE.  6 WARNING(S),  0 ERROR(S)

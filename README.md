@@ -38,3 +38,47 @@
   - RAM：512字节
   - ROM：8K（Flash）
   - 工作频率：12MHz（本开发板使用）
+
+
+# stc-isp OUTPUT
+
+```
+Checking target MCU ... 
+  MCU type: STC89C52RC/LE52RC
+
+Current H/W Option:
+  . Current clock frequency: 11.146MHz
+  . System use 12T mode
+  . Oscillator gain is HIGH
+  . Any reset source can stop WatchDog if WatchDog timer is running
+  . Internal XRAM is ENABLE
+  . ALE pin behaves as ALE function pin
+  . Do not detect the level of P1.0 and P1.1 next download
+  . Do not erase user EEPROM area at next download
+
+  MCU type: STC89C52RC/LE52RC
+
+
+Re-handshaking ... Successful			[0.593"]
+Current Baudrate: 115200
+Erasing MCU flash ...  OK !		[0.312"]
+Programming user code ... OK !		[0.437"]
+Programming OPTIONS ... OK !		[0.031"]
+
+H/W Option upgrade to:
+  . Current clock frequency: 11.146MHz
+  . System use 12T mode
+  . Oscillator gain is HIGH
+  . Any reset source can stop WatchDog if WatchDog timer is running
+  . Internal XRAM is ENABLE
+  . ALE pin behaves as ALE function pin
+  . Do not detect the level of P1.0 and P1.1 next download
+  . Do not erase user EEPROM area at next download
+
+  MCU type: STC89C52RC/LE52RC
+
+
+  Complete !(2025-11-09 19:36:26)
+
+
+```

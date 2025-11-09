@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   MAIN                                                                  11/07/2025 09:15:22 PAGE 1   
+C51 COMPILER V9.54   MAIN                                                                  11/09/2025 19:42:25 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
@@ -8,20 +8,51 @@ COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE 
 
 line level    source
 
-   1          #include <REGX52.H>
-   2          
-   3          void main()
-   4          {
-   5   1        P2=0xFE;  //1111 1110
-   6   1        while(1)
-   7   1        {
-   8   2          
-   9   2        }
-  10   1      }
+   1          // #include <REGX52.H>
+   2          #include "func.h"
+   3          #include "sample.h"
+   4          
+   5          // LED VARIABLE
+   6          // P2=0xFE; //1111 1110
+   7          
+   8          // P3_1==0   K1按键  -- 见开发板说明书
+   9          // P3_0==0   K2按键
+  10          
+  11          
+  12          
+  13          void main()
+  14          {
+  15   1        // 闪烁
+  16   1        // LedLightEvery500ms();
+  17   1      
+  18   1        // 流水等
+  19   1        // LedLightOnebyOne();
+  20   1      
+  21   1        // 按下松开
+  22   1          // PressDownControl();
+  23   1      
+  24   1        // 按下 马上松开控制Led, 类似家里开关
+  25   1        // ButtonControlLed();
+  26   1      
+  27   1        // 按键控制 8个LED 二进制计算
+  28   1        // ButtonLedBinaryCalc();
+  29   1      
+  30   1        // 按键 控制 前一个LED, 或者后一个LED 亮
+  31   1        // BUttonPrevNextLed();
+  32   1      
+  33   1        // 数码管2显示3
+  34   1        // while(1)
+  35   1        // {
+  36   1          // Nixie(2,3);  //在数码管的第2位置显示3
+  37   1        // }
+  38   1        
+  39   1        // 数码管显示123
+  40   1        display123();
+  41   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =      5    ----
+   CODE SIZE        =      3    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

@@ -1,0 +1,166 @@
+C51 COMPILER V9.54   SAMPLE                                                                11/09/2025 19:42:25 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE SAMPLE
+OBJECT MODULE PLACED IN .\Objects\sample.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE sample.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\sa
+                    -mple.lst) TABS(2) OBJECT(.\Objects\sample.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "sample.h"
+   3          #include "func.h"
+   4          
+   5          void LedLightEvery500ms()
+   6          {
+   7   1        while(1)
+   8   1        {
+   9   2          P2=0xFE;  //1111 1110
+  10   2          // P2=0xFD; //1111 1101
+  11   2          Delay500ms();
+  12   2          P2=0xFF;  //1111 1111
+  13   2          Delay500ms();
+  14   2        }
+  15   1      }
+  16          
+  17          
+  18          
+  19          
+  20          void LedLightOnebyOne() 
+  21          {
+  22   1          while(1)
+  23   1        {
+  24   2          P2=0xFE;//1111 1110
+  25   2          Delay500ms();
+  26   2          P2=0xFD;//1111 1101
+  27   2          Delay500ms();
+  28   2          P2=0xFB;//1111 1011
+  29   2          Delay500ms();
+  30   2          P2=0xF7;//1111 0111
+  31   2          Delay500ms();
+  32   2          P2=0xEF;//1110 1111
+  33   2          Delay500ms();
+  34   2          P2=0xDF;//1101 1111
+  35   2          Delay500ms();
+  36   2          P2=0xBF;//1011 1111
+  37   2          Delay500ms();
+  38   2          P2=0x7F;//0111 1111
+  39   2          Delay500ms();
+  40   2        }
+  41   1      
+  42   1      }
+  43          
+  44          
+  45          void PressDownControlLed()
+  46          {
+  47   1        while(1)
+  48   1        {
+  49   2          if(P3_1==0 || P3_0==0)  //如果K1按键或K2按键按下
+  50   2          {
+  51   3            P2_0=0;   //LED1输出0，点亮
+  52   3          }
+  53   2          else
+  54   2          {
+C51 COMPILER V9.54   SAMPLE                                                                11/09/2025 19:42:25 PAGE 2   
+
+  55   3            P2_0=1;   //LED1输出1，熄灭
+  56   3          }
+  57   2        }
+  58   1      }
+  59          
+  60          
+  61          void ButtonControlLed()
+  62          {
+  63   1        while(1)
+  64   1        {
+  65   2          if(P3_1==0)     //如果K1按键按下
+  66   2          {
+  67   3            Delay(20);    //延时消抖
+  68   3            while(P3_1==0); //松手检测
+  69   3            Delay(20);    //延时消抖
+  70   3            
+  71   3            P2_0=~P2_0;   //LED1取反
+  72   3          }
+  73   2        }
+  74   1      }
+  75          
+  76          
+  77          void ButtonLedBinaryCalc()
+  78          {
+  79   1        unsigned char LEDNum=0;
+  80   1        while(1)
+  81   1        {
+  82   2          if(P3_1==0)     //如果K1按键按下
+  83   2          {
+  84   3            Delay(20);    //延时消抖
+  85   3            while(P3_1==0); //松手检测
+  86   3            Delay(20);    //延时消抖
+  87   3            
+  88   3            LEDNum++;   //变量自增
+  89   3            P2=~LEDNum;   //变量取反输出给LED
+  90   3          }
+  91   2        }
+  92   1      }
+  93          
+  94          
+  95          void BUttonPrevNextLed()
+  96          {
+  97   1          unsigned char LEDNum;
+  98   1        P2=~0x01;       //上电默认LED1点亮
+  99   1        while(1)
+ 100   1        {
+ 101   2          if(P3_1==0)     //如果K1按键按下
+ 102   2          {
+ 103   3            Delay(20);
+ 104   3            while(P3_1==0);
+ 105   3            Delay(20);
+ 106   3            
+ 107   3            LEDNum++;   //LEDNum自增
+ 108   3            if(LEDNum>=8) //限制LEDNum自增范围
+ 109   3              LEDNum=0;
+ 110   3            P2=~(0x01<<LEDNum); //LED的第LEDNum位点亮
+ 111   3          }
+ 112   2          if(P3_0==0)     //如果K2按键按下
+ 113   2          {
+ 114   3            Delay(20);
+ 115   3            while(P3_0==0);
+ 116   3            Delay(20);
+C51 COMPILER V9.54   SAMPLE                                                                11/09/2025 19:42:25 PAGE 3   
+
+ 117   3            
+ 118   3            if(LEDNum==0) //LEDNum减到0后变为7
+ 119   3              LEDNum=7;
+ 120   3            else      //LEDNum未减到0，自减
+ 121   3              LEDNum--;
+ 122   3            P2=~(0x01<<LEDNum); //LED的第LEDNum位点亮
+ 123   3          }
+ 124   2        }
+ 125   1      }
+ 126          
+ 127          void display123()
+ 128          {
+ 129   1        while(1)
+ 130   1        {
+ 131   2          Nixie(1,1);   //在数码管的第1位置显示1
+ 132   2      //    Delay(20);
+ 133   2          Nixie(2,2);   //在数码管的第2位置显示2
+ 134   2      //    Delay(20);
+ 135   2          Nixie(3,3);   //在数码管的第3位置显示3
+ 136   2      //    Delay(20);
+ 137   2        }
+ 138   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    263    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
