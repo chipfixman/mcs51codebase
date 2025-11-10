@@ -23,6 +23,10 @@ void BUttonPrevNextLed();
 //数码管 显示123
 void display123();
 
+//LCD 1602 显示 读秒 递增
 void LCD1602_Sample();
+
+//矩阵键盘
+void MatrixKeySample();
 
 #endif

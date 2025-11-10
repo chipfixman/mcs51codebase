@@ -368,6 +368,36 @@
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
             </File>
+            <File>
+              <FileName>func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\func.c</FilePath>
+            </File>
+            <File>
+              <FileName>sample.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sample.c</FilePath>
+            </File>
+            <File>
+              <FileName>func.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\func.h</FilePath>
+            </File>
+            <File>
+              <FileName>sample.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sample.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD1602.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\LCD1602.h</FilePath>
+            </File>
+            <File>
+              <FileName>LCD1602.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\LCD1602.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

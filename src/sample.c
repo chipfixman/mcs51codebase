@@ -2,6 +2,7 @@
 #include "sample.h"
 #include "func.h"
 #include "LCD1602.h"
+#include "MatrixKey.h"
 
 void LedLightEvery500ms()
 {
@@ -150,5 +151,24 @@ void LCD1602_Sample()
 		Result++;					//Result自增
 		Delay(1000);				//延时1秒
 		LCD_ShowNum(1,1,Result,3);	//在LCD的1行1列显示Result，长度为3位
+	}
+}
+
+
+
+void MatrixKeySample()
+{
+	
+	unsigned char KeyNum;
+
+	LCD_Init();							//LCD初始化
+	LCD_ShowString(1,1,"MatrixKey:");	//LCD显示字符串
+	while(1)
+	{
+		KeyNum=MatrixKey();				//获取矩阵键盘键码
+		if(KeyNum)						//如果有按键按下
+		{
+			LCD_ShowNum(2,1,KeyNum,2);	//LCD显示键码
+		}
 	}
 }
