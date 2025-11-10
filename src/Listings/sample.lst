@@ -1,4 +1,4 @@
-C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:27:44 PAGE 1   
+C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:30:37 PAGE 1   
 
 
 C51 COMPILER V9.54, COMPILATION OF MODULE SAMPLE
@@ -62,7 +62,7 @@ line level    source
   52   2          {
   53   3            P2_0=0;   //LED1输出0，点亮
   54   3          }
-C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:27:44 PAGE 2   
+C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:30:37 PAGE 2   
 
   55   2          else
   56   2          {
@@ -126,7 +126,7 @@ line level    source
  114   2          if(P3_0==0)     //如果K2按键按下
  115   2          {
  116   3            Delay(20);
-C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:27:44 PAGE 3   
+C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:30:37 PAGE 3   
 
  117   3            while(P3_0==0);
  118   3            Delay(20);
@@ -186,16 +186,66 @@ line level    source
  172   3          }
  173   2        }
  174   1      }
+ 175          
+ 176          
+ 177          void MatrixKeyPassword()
+ 178          {
+C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:30:37 PAGE 4   
+
+ 179   1        unsigned char KeyNum;
+ 180   1        unsigned int Password,Count;
+ 181   1      
+ 182   1        LCD_Init();
+ 183   1        LCD_ShowString(1,1,"Password:");
+ 184   1        while(1)
+ 185   1        {
+ 186   2          KeyNum=MatrixKey();
+ 187   2          if(KeyNum)
+ 188   2          {
+ 189   3            if(KeyNum<=10)  //如果S1~S10按键按下，输入密码
+ 190   3            {
+ 191   4              if(Count<4) //如果输入次数小于4
+ 192   4              {
+ 193   5                Password*=10;       //密码左移一位
+ 194   5                Password+=KeyNum%10;    //获取一位密码
+ 195   5                Count++;  //计次加一
+ 196   5              }
+ 197   4              LCD_ShowNum(2,1,Password,4);  //更新显示
+ 198   4            }
+ 199   3            if(KeyNum==11)  //如果S11按键按下，确认
+ 200   3            {
+ 201   4              if(Password==2345)  //如果密码等于正确密码
+ 202   4              {
+ 203   5                LCD_ShowString(1,14,"OK "); //显示OK
+ 204   5                Password=0;   //密码清零
+ 205   5                Count=0;    //计次清零
+ 206   5                LCD_ShowNum(2,1,Password,4);  //更新显示
+ 207   5              }
+ 208   4              else        //否则
+ 209   4              {
+ 210   5                LCD_ShowString(1,14,"ERR"); //显示ERR
+ 211   5                Password=0;   //密码清零
+ 212   5                Count=0;    //计次清零
+ 213   5                LCD_ShowNum(2,1,Password,4);  //更新显示
+ 214   5              }
+ 215   4            }
+ 216   3            if(KeyNum==12)  //如果S12按键按下，取消
+ 217   3            {
+ 218   4              Password=0;   //密码清零
+ 219   4              Count=0;    //计次清零
+ 220   4              LCD_ShowNum(2,1,Password,4);  //更新显示
+ 221   4            }
+ 222   3          }
+ 223   2        }
+ 224   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    342    ----
-C51 COMPILER V9.54   SAMPLE                                                                11/10/2025 21:27:44 PAGE 4   
-
-   CONSTANT SIZE    =     11    ----
+   CODE SIZE        =    531    ----
+   CONSTANT SIZE    =     29    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----       5
+   DATA SIZE        =   ----      10
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

@@ -29,4 +29,7 @@ void LCD1602_Sample();
 //矩阵键盘
 void MatrixKeySample();
 
+//矩阵键盘 密码例子
+void MatrixKeyPassword();
+
 #endif

@@ -39,9 +39,9 @@ void main()
 	// 数码管显示123
 	// display123();
 
-  //LCD1602 读秒 递增
+    //LCD1602 读秒 递增
 	//LCD1602_Sample();
 	
-	MatrixKeySample();
-	
+	//MatrixKeySample();
+	MatrixKeyPassword();
 }
